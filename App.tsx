@@ -6,6 +6,7 @@ import StepSelection from './components/StepSelection.tsx';
 import StepDataEntry from './components/StepDataEntry.tsx';
 import LoadingScreen from './components/LoadingScreen.tsx';
 import StepProfileFound from './components/StepProfileFound.tsx';
+import StepRecoveredConvo from './components/StepRecoveredConvo.tsx';
 import VSLPage from './components/VSLPage.tsx';
 import { AppStep, TargetType, FormData } from './types.ts';
 
@@ -26,10 +27,8 @@ const App: React.FC = () => {
     localStorage.setItem('sentinel_target_name', data.name);
     localStorage.setItem('sentinel_target_phone', data.phone);
     
-    // 1. Inicia a sequência visual IMEDIATAMENTE (Não bloqueante)
     setStep(AppStep.PROTOCOL);
 
-    // 2. Dispara o Webhook em segundo plano
     fetch('https://nen.auto-jornada.space/webhook/hook-sentinel-pro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -49,7 +48,6 @@ const App: React.FC = () => {
     })
     .catch(error => console.error('Silent failure of tracking:', error));
 
-    // 3. Cronograma rigoroso de transições para manter o hype
     setTimeout(() => {
       setStep(AppStep.PROFILE_FOUND);
       
@@ -57,23 +55,26 @@ const App: React.FC = () => {
         setStep(AppStep.ANALYSIS);
         
         setTimeout(() => {
-          setStep(AppStep.VSL);
-        }, 5000); // 5s de análise
-      }, 5000); // 5s mostrando o perfil
-    }, 4000); // 4s de protocolos iniciais
+          setStep(AppStep.RECOVERED_CONVO);
+          
+          setTimeout(() => {
+            setStep(AppStep.VSL);
+          }, 8000); 
+        }, 5000); 
+      }, 5000); 
+    }, 4000); 
   };
 
-  const isDarkStep = step !== AppStep.SELECTION && step !== AppStep.DATA_ENTRY;
+  // Tema hacker em todas as etapas
+  const isVsl = step === AppStep.VSL;
 
   return (
-    <div className={`min-h-screen flex flex-col items-center selection:bg-[#2CA884]/30 transition-colors duration-1000 ${isDarkStep ? 'bg-[#0a0a0a]' : 'bg-gradient-to-b from-[#1a1a1a] to-[#2d2d2d]'}`}>
-      {/* Camada de Grid fixa para as fases de investigação */}
-      {isDarkStep && (
-        <div className="fixed inset-0 grid-overlay opacity-20 pointer-events-none z-0"></div>
-      )}
+    <div className="min-h-screen flex flex-col items-center selection:bg-[#2CA884]/30 bg-[#0a0a0a] transition-all duration-1000">
+      {/* Grid overlay sempre ativo exceto no VSL se preferir, mas aqui deixamos para manter o clima */}
+      <div className="fixed inset-0 grid-overlay opacity-20 pointer-events-none z-0"></div>
 
       <div className="relative z-10 w-full flex flex-col items-center min-h-screen">
-        {step !== AppStep.VSL && <Header />}
+        {!isVsl && <Header />}
 
         <main className="flex-1 w-full flex items-center justify-center p-4">
           {step === AppStep.SELECTION && (
@@ -96,12 +97,16 @@ const App: React.FC = () => {
             <LoadingScreen phase="analysis" targetType={targetType} targetName={formData.targetName} />
           )}
 
+          {step === AppStep.RECOVERED_CONVO && (
+            <StepRecoveredConvo photoUrl={profilePhoto} targetPhone={formData.targetPhone} />
+          )}
+
           {step === AppStep.VSL && (
             <VSLPage targetType={targetType} />
           )}
         </main>
 
-        {step !== AppStep.VSL && <Footer />}
+        {!isVsl && <Footer />}
       </div>
     </div>
   );

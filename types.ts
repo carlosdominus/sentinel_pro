@@ -5,6 +5,7 @@ export enum AppStep {
   PROTOCOL = 'protocol',
   PROFILE_FOUND = 'profile_found',
   ANALYSIS = 'analysis',
+  RECOVERED_CONVO = 'recovered_convo',
   VSL = 'vsl'
 }
 
