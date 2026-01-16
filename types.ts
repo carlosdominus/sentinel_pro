@@ -2,7 +2,9 @@
 export enum AppStep {
   SELECTION = 'selection',
   DATA_ENTRY = 'data_entry',
-  LOADING = 'loading',
+  PROTOCOL = 'protocol',
+  PROFILE_FOUND = 'profile_found',
+  ANALYSIS = 'analysis',
   VSL = 'vsl'
 }
 
