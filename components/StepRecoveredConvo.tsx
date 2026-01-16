@@ -26,37 +26,38 @@ const StepRecoveredConvo: React.FC<StepRecoveredConvoProps> = ({ photoUrl, targe
           className="w-full h-full object-contain"
         />
 
-        {/* --- OVERLAYS DE FOTO DINÂMICA - POSICIONAMENTO CORRIGIDO --- */}
+        {/* --- OVERLAYS DE FOTO DINÂMICA - AJUSTE MANUAL PRECISO --- */}
+        {/* Foto do áudio: Subindo mais do que as outras conforme solicitado */}
         
         {/* 1. Foto no Áudio (Mensagem de Voz) */}
-        <div className="absolute top-[35.6%] left-[26.8%] w-[9.3%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[26.0%] left-[24.0%] w-[9.3%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover" alt="target" />
         </div>
 
         {/* 2. Fotos na Lista Inferior (Censurada) */}
         {/* Item 1 */}
-        <div className="absolute top-[64.8%] left-[26.8%] w-[9%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[59.5%] left-[24.0%] w-[9%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover opacity-90" alt="target" />
         </div>
         
         {/* Item 2 */}
-        <div className="absolute top-[74.2%] left-[26.8%] w-[9%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[69.9%] left-[24.0%] w-[9%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover opacity-90" alt="target" />
         </div>
 
         {/* Item 3 */}
-        <div className="absolute top-[83.6%] left-[26.8%] w-[9%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[80.3%] left-[24.0%] w-[9%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover opacity-90" alt="target" />
         </div>
 
         {/* Item 4 */}
-        <div className="absolute top-[93.0%] left-[26.8%] w-[9%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[89.7%] left-[24.0%] w-[9%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover opacity-90" alt="target" />
         </div>
 
         {/* Overlay de Bloqueio - Estilo Botão WhatsApp */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-           <div className="bg-white px-6 py-4 rounded-full shadow-[0_15px_40px_rgba(0,0,0,0.3)] border border-gray-100 flex items-center gap-3 animate-pulse">
+           <div className="bg-white/95 px-6 py-4 rounded-full shadow-[0_15px_40px_rgba(0,0,0,0.3)] border border-gray-100 flex items-center gap-3 animate-pulse">
               <span className="text-2xl">🔐</span>
               <span className="font-black text-gray-800 uppercase tracking-tighter text-lg italic">ATIVE SEU CADASTRO</span>
            </div>

@@ -65,16 +65,17 @@ const App: React.FC = () => {
     }, 4000); 
   };
 
-  // Tema hacker em todas as etapas
+  const isDarkStep = ![AppStep.SELECTION, AppStep.DATA_ENTRY].includes(step);
   const isVsl = step === AppStep.VSL;
 
   return (
-    <div className="min-h-screen flex flex-col items-center selection:bg-[#2CA884]/30 bg-[#0a0a0a] transition-all duration-1000">
-      {/* Grid overlay sempre ativo exceto no VSL se preferir, mas aqui deixamos para manter o clima */}
-      <div className="fixed inset-0 grid-overlay opacity-20 pointer-events-none z-0"></div>
+    <div className={`min-h-screen flex flex-col items-center selection:bg-[#2CA884]/30 transition-all duration-700 ${isDarkStep ? 'bg-[#0a0a0a]' : 'bg-[#f0f2f5]'}`}>
+      {isDarkStep && (
+        <div className="fixed inset-0 grid-overlay opacity-20 pointer-events-none z-0"></div>
+      )}
 
       <div className="relative z-10 w-full flex flex-col items-center min-h-screen">
-        {!isVsl && <Header />}
+        {!isVsl && <Header theme={isDarkStep ? 'dark' : 'light'} />}
 
         <main className="flex-1 w-full flex items-center justify-center p-4">
           {step === AppStep.SELECTION && (
@@ -106,7 +107,7 @@ const App: React.FC = () => {
           )}
         </main>
 
-        {!isVsl && <Footer />}
+        {!isVsl && <Footer theme={isDarkStep ? 'dark' : 'light'} />}
       </div>
     </div>
   );
