@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import { Loader2, ShieldCheck, Database, Cpu, AlertTriangle, Search, MapPin, MessageSquareOff } from 'lucide-react';
-import { TargetType } from '../types';
+import { Loader2, ShieldCheck, Cpu, AlertTriangle, Search, MapPin, MessageSquareOff } from 'lucide-react';
+import { TargetType } from '../types.ts';
 
 interface LoadingScreenProps {
   targetType: TargetType;
@@ -70,25 +70,15 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ targetType, targetName })
 
           <div className="text-center w-full">
             <h3 className="text-lg font-bold text-gray-800 mb-6 uppercase tracking-widest font-tech">Processando Protocolos</h3>
-            
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-xl border border-gray-100">
                  <ShieldCheck size={20} className="text-[#2CA884]" />
                  <div className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="w-full h-full bg-[#2CA884] origin-left animate-[grow_2s_ease-in-out]"></div>
+                    <div className="w-full h-full bg-[#2CA884] origin-left"></div>
                  </div>
-                 <span className="text-[10px] font-bold text-[#2CA884]">SECURE</span>
-              </div>
-              <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-xl border border-gray-100">
-                 <Cpu size={20} className="text-[#2CA884]" />
-                 <div className="flex-1 h-1 bg-gray-200 rounded-full overflow-hidden">
-                    <div className="w-3/4 h-full bg-[#2CA884] origin-left animate-[grow_1.5s_ease-in-out]"></div>
-                 </div>
-                 <span className="text-[10px] font-bold text-gray-400">PROXY</span>
               </div>
             </div>
-
-            <p className="text-sm font-semibold text-[#2CA884] animate-pulse min-h-[1.5rem]">
+            <p className="text-sm font-semibold text-[#2CA884] animate-pulse">
               {status}
             </p>
           </div>
@@ -100,11 +90,9 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ targetType, targetName })
               <AlertTriangle className="text-red-500" size={32} />
             </div>
           </div>
-          
           <h3 className="text-center text-lg font-bold text-gray-800 mb-6 uppercase tracking-widest font-tech">
             Analisando Integridade de {targetName}
           </h3>
-
           <div className="space-y-3">
             {analysisStages.map((stage, idx) => (
               <div 
@@ -112,30 +100,12 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ targetType, targetName })
                 className={`flex items-center gap-3 p-4 rounded-xl border border-gray-100 transition-all duration-500 transform ${visibleAnalysis.includes(idx) ? 'opacity-100 translate-y-0 bg-gray-50' : 'opacity-0 translate-y-4'}`}
               >
                 <stage.icon size={18} className={stage.color} />
-                <span className={`text-xs font-bold uppercase tracking-wide ${stage.color}`}>
-                  {stage.text}
-                </span>
-                {visibleAnalysis.includes(idx) && (
-                  <div className="ml-auto">
-                    <div className={`w-2 h-2 rounded-full animate-pulse ${stage.color.replace('text', 'bg')}`}></div>
-                  </div>
-                )}
+                <span className={`text-xs font-bold uppercase tracking-wide ${stage.color}`}>{stage.text}</span>
               </div>
             ))}
           </div>
-
-          <p className="text-center text-[10px] text-gray-400 mt-8 font-bold animate-pulse">
-            CONSOLIDANDO RELATÓRIO FINAL...
-          </p>
         </div>
       )}
-
-      <style>{`
-        @keyframes grow {
-          from { transform: scaleX(0); }
-          to { transform: scaleX(1); }
-        }
-      `}</style>
     </div>
   );
 };

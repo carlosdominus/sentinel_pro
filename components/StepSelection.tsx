@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { User, UserCheck, Zap, Lock, ShieldAlert } from 'lucide-react';
-import { TargetType } from '../types';
-import { SOCIAL_PROOF_COUNT } from '../constants';
+import { TargetType } from '../types.ts';
+import { SOCIAL_PROOF_COUNT } from '../constants.ts';
 
 interface StepSelectionProps {
   onSelect: (target: TargetType) => void;

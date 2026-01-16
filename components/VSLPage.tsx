@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { ShieldAlert, CheckCircle2 } from 'lucide-react';
-import { TargetType } from '../types';
+import { TargetType } from '../types.ts';
 
 interface VSLPageProps {
   targetType: TargetType;
@@ -11,14 +11,12 @@ const VSLPage: React.FC<VSLPageProps> = ({ targetType }) => {
   const pronoun = targetType === 'wife' ? 'ELA' : 'ELE';
 
   useEffect(() => {
-    // Inject the Vturb player script dynamically on mount
     const s = document.createElement("script");
     s.src = "https://scripts.converteai.net/853c4f04-8442-44da-b89d-0541d78036bb/players/6967cafd00d5e38957962d07/v4/player.js";
     s.async = true;
     document.head.appendChild(s);
 
     return () => {
-      // Cleanup script if necessary (usually not needed for landing pages, but good practice)
       if (document.head.contains(s)) {
         document.head.removeChild(s);
       }
@@ -37,7 +35,6 @@ const VSLPage: React.FC<VSLPageProps> = ({ targetType }) => {
         </h1>
       </div>
 
-      {/* Vturb SmartPlayer Container */}
       <div className="w-full flex justify-center mb-8">
         <div className="w-full max-w-[640px] shadow-[0_0_50px_rgba(231,76,60,0.3)] rounded-2xl overflow-hidden border-2 border-red-500/20 bg-black">
           <div dangerouslySetInnerHTML={{ __html: `

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Smartphone, User, Phone, ArrowRight, MessageCircle, Clock, CheckCircle2 } from 'lucide-react';
-import { TargetType } from '../types';
+import { TargetType } from '../types.ts';
 
 interface StepDataEntryProps {
   targetType: TargetType;
@@ -115,10 +115,6 @@ const StepDataEntry: React.FC<StepDataEntryProps> = ({ targetType, onSubmit }) =
           </div>
         </div>
       </div>
-
-      <p className="text-[10px] text-center text-gray-400 mt-8 italic">
-        *Ferramenta 100% anônima - Não responde mensagens para manter o sigilo
-      </p>
     </div>
   );
 };

@@ -1,21 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import StepSelection from './components/StepSelection';
-import StepDataEntry from './components/StepDataEntry';
-import LoadingScreen from './components/LoadingScreen';
-import VSLPage from './components/VSLPage';
-import { AppStep, TargetType, FormData } from './types';
+import Header from './components/Header.tsx';
+import Footer from './components/Footer.tsx';
+import StepSelection from './components/StepSelection.tsx';
+import StepDataEntry from './components/StepDataEntry.tsx';
+import LoadingScreen from './components/LoadingScreen.tsx';
+import VSLPage from './components/VSLPage.tsx';
+import { AppStep, TargetType, FormData } from './types.ts';
 
 const App: React.FC = () => {
   const [step, setStep] = useState<AppStep>(AppStep.SELECTION);
   const [targetType, setTargetType] = useState<TargetType>(null);
   const [formData, setFormData] = useState<FormData>({ targetName: '', targetPhone: '' });
-
-  useEffect(() => {
-    // Initial load fade-in effect is handled via CSS classes
-  }, []);
 
   const handleTargetSelect = (target: TargetType) => {
     setTargetType(target);
@@ -29,7 +25,6 @@ const App: React.FC = () => {
     localStorage.setItem('sentinel_target_phone', data.phone);
     setStep(AppStep.LOADING);
 
-    // Simulated fake loading for 6 seconds now to allow for two-phase animation
     setTimeout(() => {
       setStep(AppStep.VSL);
     }, 6500);
