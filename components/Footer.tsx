@@ -22,7 +22,7 @@ const Footer: React.FC<FooterProps> = ({ theme = 'light' }) => {
         </div>
       </div>
       <p className="text-gray-400 text-[10px] leading-relaxed px-8 uppercase font-bold tracking-tighter opacity-70">
-        © 2024 Sentinel Pro. Todos os direitos reservados.<br />
+        © 2024 Aplicativo Espião. Todos os direitos reservados.<br />
         Este sistema é destinado apenas para uso ético e legal.
       </p>
     </footer>

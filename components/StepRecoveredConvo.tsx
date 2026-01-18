@@ -1,75 +1,98 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { TargetType } from '../types.ts';
+import { ShieldCheck, ArrowRight, Lock } from 'lucide-react';
 
 interface StepRecoveredConvoProps {
   photoUrl: string | null;
   targetPhone: string;
+  targetType: TargetType;
+  onNext: () => void;
 }
 
-const StepRecoveredConvo: React.FC<StepRecoveredConvoProps> = ({ photoUrl, targetPhone }) => {
+const StepRecoveredConvo: React.FC<StepRecoveredConvoProps> = ({ photoUrl, targetPhone, targetType, onNext }) => {
+  const [showButton, setShowButton] = useState(false);
   const defaultPhoto = "https://i.ibb.co/TqntNH0j/pngtree-whatsapp-default-profile-photo-vector-png-image-17034397.webp";
   const finalPhoto = photoUrl || defaultPhoto;
 
-  return (
-    <div className="w-full max-w-lg bg-white rounded-3xl p-5 shadow-[0_0_80px_rgba(0,0,0,0.8)] animate-fade-in flex flex-col items-center border border-white/5">
-      <div className="text-center mb-5 px-4">
-        <p className="text-gray-600 text-[13px] leading-snug">
-          Esta conversa, previamente <span className="font-bold">excluída</span>, foi <span className="font-bold">recuperada e classificada</span> como criticamente <span className="font-bold">suspeita</span>.
-        </p>
-      </div>
+  // Imagem base dinâmica
+  const bgImage = targetType === 'husband' 
+    ? "https://i.ibb.co/Wd9qN6y/app-espi-o.webp"
+    : "https://i.ibb.co/1Y8RBfMK/0101-jgivu4.png";
 
+  useEffect(() => {
+    // Pequeno delay para o botão aparecer após o usuário processar a imagem
+    const timer = setTimeout(() => setShowButton(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="w-full max-w-lg bg-white rounded-3xl p-5 shadow-[0_0_80px_rgba(0,0,0,0.8)] animate-fade-in flex flex-col items-center border border-white/5 relative">
+      
       <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-inner border border-gray-100 bg-[#e5ddd5]">
-        {/* Imagem de Fundo Base (Conversa do WhatsApp) */}
+        {/* Imagem de Fundo Base Dinâmica - Sem Blur agora */}
         <img 
-          src="https://i.ibb.co/1Y8RBfMK/0101-jgivu4.png" 
+          src={bgImage} 
           alt="Conversa Recuperada" 
           className="w-full h-full object-contain"
         />
 
-        {/* --- OVERLAYS DE FOTO DINÂMICA - AJUSTE MANUAL PRECISO --- */}
-        {/* Foto do áudio: Subindo mais do que as outras conforme solicitado */}
-        
-        {/* 1. Foto no Áudio (Mensagem de Voz) */}
-        <div className="absolute top-[26.0%] left-[24.0%] w-[9.3%] aspect-square rounded-full overflow-hidden">
+        {/* --- OVERLAYS DE FOTO DINÂMICA --- */}
+        <div className="absolute top-[26.5%] left-[23.5%] w-[10.5%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover" alt="target" />
         </div>
 
-        {/* 2. Fotos na Lista Inferior (Censurada) */}
-        {/* Item 1 */}
-        <div className="absolute top-[59.5%] left-[24.0%] w-[9%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[59.6%] left-[23.5%] w-[10.2%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover opacity-90" alt="target" />
         </div>
         
-        {/* Item 2 */}
-        <div className="absolute top-[69.9%] left-[24.0%] w-[9%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[70.0%] left-[23.5%] w-[10.2%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover opacity-90" alt="target" />
         </div>
 
-        {/* Item 3 */}
-        <div className="absolute top-[80.3%] left-[24.0%] w-[9%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[80.4%] left-[23.5%] w-[10.2%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover opacity-90" alt="target" />
         </div>
 
-        {/* Item 4 */}
-        <div className="absolute top-[89.7%] left-[24.0%] w-[9%] aspect-square rounded-full overflow-hidden">
+        <div className="absolute top-[90.5%] left-[23.5%] w-[10.2%] aspect-square rounded-full overflow-hidden">
           <img src={finalPhoto} className="w-full h-full object-cover opacity-90" alt="target" />
-        </div>
-
-        {/* Overlay de Bloqueio - Estilo Botão WhatsApp */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-           <div className="bg-white/95 px-6 py-4 rounded-full shadow-[0_15px_40px_rgba(0,0,0,0.3)] border border-gray-100 flex items-center gap-3 animate-pulse">
-              <span className="text-2xl">🔐</span>
-              <span className="font-black text-gray-800 uppercase tracking-tighter text-lg italic">ATIVE SEU CADASTRO</span>
-           </div>
         </div>
       </div>
 
-      <div className="mt-6 w-full flex flex-col items-center">
-        <div className="flex items-center justify-center gap-2 text-[#2CA884]">
-          <div className="w-2 h-2 bg-[#2CA884] rounded-full animate-ping"></div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] font-tech">Descriptografando anexos ocultos...</span>
+      <div className="mt-6 w-full flex flex-col items-center gap-4">
+        {showButton ? (
+          <button
+            onClick={onNext}
+            className="w-full bg-[#2CA884] hover:bg-[#248f6d] text-white font-black py-5 rounded-2xl shadow-[0_10px_30px_rgba(44,168,132,0.4)] transition-all transform hover:scale-[1.03] active:scale-95 flex flex-col items-center justify-center gap-0 animate-bounce-subtle group"
+          >
+            <span className="text-lg md:text-xl uppercase tracking-tighter flex items-center gap-2">
+              FINALIZE SEU CADASTRO
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </span>
+            <span className="text-[10px] opacity-80 font-medium uppercase tracking-[0.1em]">Liberação Imediata do Relatório Completo</span>
+          </button>
+        ) : (
+          <div className="flex items-center justify-center gap-2 text-[#2CA884]">
+            <div className="w-2 h-2 bg-[#2CA884] rounded-full animate-ping"></div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] font-tech">Preparando interface de liberação...</span>
+          </div>
+        )}
+
+        <div className="flex items-center gap-2 opacity-50">
+          <ShieldCheck size={14} className="text-gray-400" />
+          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">Protocolo de Segurança 256-bit SSL</span>
         </div>
       </div>
+
+      <style>{`
+        @keyframes bounce-subtle {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+        }
+        .animate-bounce-subtle {
+          animation: bounce-subtle 2s infinite ease-in-out;
+        }
+      `}</style>
     </div>
   );
 };

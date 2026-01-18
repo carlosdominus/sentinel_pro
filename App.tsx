@@ -7,7 +7,6 @@ import StepDataEntry from './components/StepDataEntry.tsx';
 import LoadingScreen from './components/LoadingScreen.tsx';
 import StepProfileFound from './components/StepProfileFound.tsx';
 import StepRecoveredConvo from './components/StepRecoveredConvo.tsx';
-import VSLPage from './components/VSLPage.tsx';
 import { AppStep, TargetType, FormData } from './types.ts';
 
 const App: React.FC = () => {
@@ -56,17 +55,16 @@ const App: React.FC = () => {
         
         setTimeout(() => {
           setStep(AppStep.RECOVERED_CONVO);
-          
-          setTimeout(() => {
-            setStep(AppStep.VSL);
-          }, 8000); 
         }, 5000); 
       }, 5000); 
     }, 4000); 
   };
 
+  const handleFinalize = () => {
+    window.location.href = "https://aplicativoespiao.site/ape/front";
+  };
+
   const isDarkStep = ![AppStep.SELECTION, AppStep.DATA_ENTRY].includes(step);
-  const isVsl = step === AppStep.VSL;
 
   return (
     <div className={`min-h-screen flex flex-col items-center selection:bg-[#2CA884]/30 transition-all duration-700 ${isDarkStep ? 'bg-[#0a0a0a]' : 'bg-[#f0f2f5]'}`}>
@@ -75,7 +73,7 @@ const App: React.FC = () => {
       )}
 
       <div className="relative z-10 w-full flex flex-col items-center min-h-screen">
-        {!isVsl && <Header theme={isDarkStep ? 'dark' : 'light'} />}
+        <Header theme={isDarkStep ? 'dark' : 'light'} />
 
         <main className="flex-1 w-full flex items-center justify-center p-4">
           {step === AppStep.SELECTION && (
@@ -99,15 +97,16 @@ const App: React.FC = () => {
           )}
 
           {step === AppStep.RECOVERED_CONVO && (
-            <StepRecoveredConvo photoUrl={profilePhoto} targetPhone={formData.targetPhone} />
-          )}
-
-          {step === AppStep.VSL && (
-            <VSLPage targetType={targetType} />
+            <StepRecoveredConvo 
+              photoUrl={profilePhoto} 
+              targetPhone={formData.targetPhone} 
+              targetType={targetType} 
+              onNext={handleFinalize}
+            />
           )}
         </main>
 
-        {!isVsl && <Footer theme={isDarkStep ? 'dark' : 'light'} />}
+        <Footer theme={isDarkStep ? 'dark' : 'light'} />
       </div>
     </div>
   );
