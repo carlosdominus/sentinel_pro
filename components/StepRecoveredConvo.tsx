@@ -29,8 +29,8 @@ const StepRecoveredConvo: React.FC<StepRecoveredConvoProps> = ({ photoUrl, targe
 
   // Imagem do print da conversa (fundo)
   const bgImage = targetType === 'husband' 
-    ? "https://i.ibb.co/RkY7LzZ4/foto-mulher.webp"
-    : "https://i.ibb.co/KchPYkP6/foto-homem.webp";
+    ? "https://i.ibb.co/1fvPbQw4/foto-conversa-mulher-converted.webp"
+    : "https://i.ibb.co/CshKLy6k/foto-conversa-homem-converted.webp";
 
   // Lógica de imagens conforme solicitado:
   // Espionar Mulher (targetType === 'wife') -> Aparece Homens
