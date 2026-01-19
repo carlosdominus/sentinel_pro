@@ -29,8 +29,8 @@ const StepRecoveredConvo: React.FC<StepRecoveredConvoProps> = ({ photoUrl, targe
 
   // Imagem do print da conversa (fundo)
   const bgImage = targetType === 'husband' 
-    ? "https://i.ibb.co/1fvPbQw4/foto-conversa-mulher-converted.webp"
-    : "https://i.ibb.co/CshKLy6k/foto-conversa-homem-converted.webp";
+    ? "https://i.ibb.co/zHbkw25n/foto-mulher2-converted.webp"
+    : "https://i.ibb.co/pjKHkhsK/foto-homem1-converted.webp";
 
   // Lógica de imagens conforme solicitado:
   // Espionar Mulher (targetType === 'wife') -> Aparece Homens
@@ -65,7 +65,7 @@ const StepRecoveredConvo: React.FC<StepRecoveredConvoProps> = ({ photoUrl, targe
           className="w-full h-auto block"
         />
 
-        {/* Foto de Perfil Dinâmica */}
+        {/* Foto de Perfil Dinâmica com Blur Sutil */}
         <div 
           className="absolute z-20 aspect-square rounded-full overflow-hidden"
           style={{
@@ -76,7 +76,7 @@ const StepRecoveredConvo: React.FC<StepRecoveredConvoProps> = ({ photoUrl, targe
         >
           <img 
             src={finalPhoto} 
-            className="w-full h-full object-cover" 
+            className="w-full h-full object-cover blur-[1.5px] contrast-125" 
             alt="Foto do Alvo" 
           />
         </div>
