@@ -90,7 +90,7 @@ const StepRecoveredConvo: React.FC<StepRecoveredConvoProps> = ({ photoUrl, targe
             className="w-full bg-[#2CA884] hover:bg-[#248f6d] text-white font-black py-6 rounded-2xl shadow-[0_15px_40px_rgba(44,168,132,0.4)] transition-all transform hover:scale-[1.03] active:scale-95 flex flex-col items-center justify-center gap-0 animate-bounce-subtle group"
           >
             <span className="text-xl md:text-2xl uppercase tracking-tighter flex items-center gap-2">
-              FINALIZE SEU CADASTRO
+              REALIZAR INVESTIGAÇÃO COMPLETA
               <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </span>
             <span className="text-[11px] opacity-80 font-medium uppercase tracking-[0.15em]">Liberação Imediata do Relatório Completo</span>

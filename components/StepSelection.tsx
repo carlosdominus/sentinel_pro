@@ -72,7 +72,7 @@ const StepSelection: React.FC<StepSelectionProps> = ({ onSelect }) => {
 
         <div className="text-center mt-4 pt-4 border-t border-gray-100">
           <p className="text-[10px] text-[#2CA884] font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-            <span className="animate-pulse">🔥</span> {SOCIAL_PROOF_COUNT.toLocaleString('pt-BR')} pessoas descobriram a verdade esta semana
+            🔥 {SOCIAL_PROOF_COUNT.toLocaleString('pt-BR')} parceiros expostos esta semana
           </p>
         </div>
       </div>

@@ -12,7 +12,7 @@ const StepDataEntry: React.FC<StepDataEntryProps> = ({ targetType, onSubmit }) =
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
-  const targetLabel = targetType === 'husband' ? 'Marido' : 'Esposa';
+  const placeholderText = targetType === 'husband' ? 'Nome do Parceiro' : 'Nome da Parceira';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ const StepDataEntry: React.FC<StepDataEntryProps> = ({ targetType, onSubmit }) =
             <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             <input
               type="text"
-              placeholder={`Nome do(a) ${targetLabel}`}
+              placeholder={placeholderText}
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -82,7 +82,7 @@ const StepDataEntry: React.FC<StepDataEntryProps> = ({ targetType, onSubmit }) =
             type="submit"
             className="w-full bg-[#2CA884] hover:bg-[#248f6d] text-white font-bold py-5 rounded-2xl shadow-lg transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2 mt-4 font-tech uppercase tracking-widest italic"
           >
-            Acessar Dashboard Secreto
+            INVESTIGAR MENSAGENS!
             <ArrowRight size={20} />
           </button>
         </form>
