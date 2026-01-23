@@ -53,14 +53,14 @@ const StepProfileFound: React.FC<StepProfileFoundProps> = ({ targetPhone, photoU
         </h2>
 
         <div className="relative mb-8 group">
-          <div className="w-44 h-44 rounded-full border-2 border-[#2CA884]/30 p-1 bg-black/50 relative overflow-hidden shadow-[0_0_25px_rgba(44,168,132,0.2)]">
+          <div className="w-44 h-44 rounded-full border-2 border-[#2CA884]/30 p-1 bg-black/50 relative overflow-hidden shadow-[0_0_25px_rgba(44,168,132,0.2)] aspect-square">
             {/* Scanline Effect */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#2CA884]/40 to-transparent h-1/2 w-full animate-scan z-20 pointer-events-none"></div>
             
             <img 
               src={photoUrl || defaultPhoto} 
               alt="Perfil" 
-              className="w-full h-full rounded-full object-cover filter brightness-75 group-hover:brightness-100 transition-all duration-700"
+              className="w-full h-full rounded-full object-cover filter brightness-75 group-hover:brightness-100 transition-all duration-700 aspect-square"
             />
             
             {/* Digital Frame Elements */}
