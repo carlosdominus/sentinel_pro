@@ -61,7 +61,7 @@ const App: React.FC = () => {
   };
 
   const handleFinalize = () => {
-    window.location.href = "https://novidadesdeagora/spy/front";
+    window.location.href = "https://novidadesdeagora.site/spy/front";
   };
 
   const isDarkStep = ![AppStep.SELECTION, AppStep.DATA_ENTRY].includes(step);
